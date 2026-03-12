@@ -1,7 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
 
 Route::get('/', function () {
     return view('layouts.index');
-});
+})->name('main.index');
+
+
+// Dashboard
+
+Route::get('/dashboard' , function (){
+    return view('layouts.admin.dashboard');
+})->name('user.dashboard');
+
+
+// Authentication
+
+Route::get('/{type}', [AuthController::class , 'showForm'])->name('user.create');
+Route::post('/register', [AuthController::class , 'register'])->name('user.register');
+
+

@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Log in — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="login">
+@extends('layouts.app')
 
-  <div class="auth-wrapper">
+@section('content')
 
-    <!-- Minimal top bar -->
-    <nav class="navbar">
-      <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-        <ul class="navbar__links">
-          <li><a href="register.html">Don't have an account? <strong>Sign up</strong></a></li>
-        </ul>
-      </div>
-    </nav>
+
 
     <div class="auth-body">
       <div class="auth-box">
@@ -78,7 +62,4 @@
     </div>
 
   </div>
-
-  <script src="main.js"></script>
-</body>
-</html>
+@endsection

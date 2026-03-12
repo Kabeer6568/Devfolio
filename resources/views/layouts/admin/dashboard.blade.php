@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="dashboard">
+@extends('layouts.app')
 
-  <!-- Top Navbar -->
-  <nav class="navbar">
-    <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-      <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
-        <li>
-          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">J</div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+@section('content')
+
 
   <div class="dashboard">
 
@@ -156,6 +138,5 @@
     </main>
   </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+  
+@endsection

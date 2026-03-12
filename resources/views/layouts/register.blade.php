@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Account — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="register">
+@extends('layouts.app')
 
-  <div class="auth-wrapper">
+@section('content')
 
-    <nav class="navbar">
-      <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-        <ul class="navbar__links">
-          <li><a href="login.html">Already have an account? <strong>Log in</strong></a></li>
-        </ul>
-      </div>
-    </nav>
+
 
     <div class="auth-body">
       <div class="auth-box" style="max-width: 460px;">
@@ -30,13 +15,14 @@
         </div>
 
         <div class="card">
-          <form id="register-form">
-
+          <form id="register-form" action="{{ route('user.register') }}" method="POST">
+            @csrf
             <div class="form-group">
               <label class="form-label" for="reg-name">Full name</label>
               <input
                 class="form-input"
                 type="text"
+                name="name"
                 id="reg-name"
                 placeholder="Jane Smith"
                 autocomplete="name"
@@ -48,6 +34,7 @@
               <input
                 class="form-input"
                 type="email"
+                name="email"
                 id="reg-email"
                 placeholder="you@example.com"
                 autocomplete="email"
@@ -61,6 +48,7 @@
                 <input
                   class="form-input"
                   type="text"
+                  name="username"
                   id="reg-username"
                   placeholder="yourname"
                   style="padding-left: 8.5rem;"
@@ -75,6 +63,7 @@
               <input
                 class="form-input"
                 type="password"
+                name="password"
                 id="reg-pass"
                 placeholder="Min. 8 characters"
                 autocomplete="new-password"
@@ -121,6 +110,4 @@
 
   </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+ @endsection
