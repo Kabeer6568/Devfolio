@@ -11,9 +11,7 @@ Route::get('/', function () {
 
 // Dashboard
 
-Route::get('/dashboard' , function (){
-    return view('layouts.admin.dashboard');
-})->name('user.dashboard');
+Route::get('/dashboard' , [AuthController::class , 'dash'])->middleware('auth')->name('user.dashboard');
 
 
 // Authentication

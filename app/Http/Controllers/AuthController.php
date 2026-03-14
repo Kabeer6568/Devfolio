@@ -77,4 +77,18 @@ class AuthController extends Controller
 
     }
 
+    public function dash(){
+
+        $user = auth()->user();
+        
+        return view('layouts.admin.dashboard' , compact('user'));
+        
+    }
+
+    public function home(){
+
+        return route('main.index');
+
+    }
+
 }
