@@ -42,4 +42,39 @@ class AuthController extends Controller
 
     }
 
+    public function login(Request $request){
+
+    $request->validate([
+
+    'login' => 'required|string|max:255',
+    'password' => 'required|string|max:255',
+ 
+    ]);
+
+    $filterData = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+
+    $credencials = ([
+
+    $filterData => $request->login,
+    'password' => $request->password,
+
+    ]);
+
+    if (Auth::attempt($credencials)) {
+    
+    return redirect()->route('user.dashboard')->with('sucess' , 'logged In');
+
+    }
+    else{
+
+    return back()->withError([
+
+    'login' => 'Username/Email or Password is incorrect'
+
+    ])->onlyOutput('login');
+
+    }
+
+    }
+
 }

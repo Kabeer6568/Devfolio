@@ -15,16 +15,17 @@
         </div>
 
         <div class="card">
-          <form id="login-form">
-
+          <form id="login-form" action="{{ route('user.login') }}"  method="POST">
+            @csrf
             <div class="form-group">
-              <label class="form-label" for="login-email">Email</label>
+              <label class="form-label" for="login-email">Email Or Name</label>
               <input
                 class="form-input"
-                type="email"
+                type="text"
+                name="login" 
                 id="login-email"
-                placeholder="you@example.com"
-                autocomplete="email"
+                placeholder="you@example.com OR Kabeer"
+                
               />
             </div>
 
@@ -36,6 +37,7 @@
               <input
                 class="form-input"
                 type="password"
+                name="password"
                 id="login-pass"
                 placeholder="••••••••"
                 autocomplete="current-password"

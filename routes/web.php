@@ -20,5 +20,6 @@ Route::get('/dashboard' , function (){
 
 Route::get('/{type}', [AuthController::class , 'showForm'])->name('user.create');
 Route::post('/register', [AuthController::class , 'register'])->name('user.register');
+Route::post('/login', [AuthController::class , 'login'])->name('user.login');
 
 
