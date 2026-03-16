@@ -8,6 +8,11 @@ Route::get('/', function () {
     return view('layouts.index');
 })->name('main.index');
 
+//Edit Profile
+
+Route::get('/edit-profile' , [AuthController::class , 'editPage'])->middleware('auth')->name('user.edit');
+Route::post('/edit-profile' , [AuthController::class , 'editProfile'])->middleware('auth')->name('user.editProfile');
+
 
 // Dashboard
 

@@ -46,7 +46,7 @@
       <div class="page-header">
         <div>
           <h1 class="page-header__title">Dashboard</h1>
-          <p class="page-header__sub">Welcome back, Jane. Here's your portfolio overview.</p>
+          <p class="page-header__sub">Welcome back, {{ $user->name }}. Here's your portfolio overview.</p>
         </div>
         <a href="portfolio.html" class="btn btn--outline btn--sm" target="_blank">Preview portfolio ↗</a>
       </div>
@@ -76,7 +76,7 @@
         <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
           <div>
             <p class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.35rem;">Your portfolio URL</p>
-            <p class="text-mono" style="font-size:0.9rem;">devfolio.io/u/<strong>janesmith</strong></p>
+            <p class="text-mono" style="font-size:0.9rem;">devfolio.io/u/<strong>{{ $user->username }}</strong></p>
           </div>
           <div style="display:flex; gap:0.5rem;">
             <button class="btn btn--outline btn--sm" id="copy-link" data-url="https://devfolio.io/u/janesmith">Copy link</button>
@@ -87,7 +87,7 @@
 
       <!-- Quick actions -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
-        <a href="edit-profile.html" class="card card--hover" style="text-decoration:none; display:block;">
+        <a href="{{ route('user.edit') }}" class="card card--hover" style="text-decoration:none; display:block;">
           <p class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem;">Quick action</p>
           <h4 style="font-size:0.9375rem; margin-bottom:0.3rem;">Edit profile →</h4>
           <p class="text-sm text-muted">Update your bio, avatar, and social links.</p>
