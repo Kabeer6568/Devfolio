@@ -106,15 +106,18 @@ class AuthController extends Controller
         'email'=> 'nullable|string|max:255|unique:users,email,' . auth()->id(),
         'password' => 'nullable|string|max:255',
         'username' => 'nullable|string|max:255|unique:users,username,' . auth()->id(),
-        'bio' => 'nullable|string|max:255',
+        'bio' => 'nullable|string|max:5000',
         'yoe' => 'nullable|string|max:255',
-        'social_links' => 'nullable|array',
+        'social_links'                   => 'nullable|array',
+        'social_links.*.platform'        => 'nullable|string|max:255',
+        'social_links.*.url'             => 'nullable|url|max:255',
         'upload_cv' => 'nullable|mimes:pdf,docx,doc|max:2048',
         'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
         ]);
 // Update basic fields using fill() to handle everything in the $data array at once
-    $user->fill($request->except(['password', 'avatar', 'upload_cv']));
+    $user->fill(collect($data)->except(['password', 'avatar', 'upload_cv'])->toArray());
+
 
         // Handle Password 
         if ($request->filled('password')) {

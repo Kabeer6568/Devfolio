@@ -97,33 +97,22 @@ function initHome() {
   });
 }
 
-// ── Login Page ───────────────────────────────
 function initLogin() {
   const form = $('#login-form');
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
     const email = $('#login-email').value.trim();
     const pass = $('#login-pass').value;
-    const btn = form.querySelector('[type="submit"]');
 
     if (!email || !pass) {
+      e.preventDefault(); // only prevent if validation fails
       showAlert(form, 'Please fill in all fields.');
       return;
     }
-
-    btn.textContent = 'signing in...';
-    btn.disabled = true;
-
-    // Simulate auth
-    setTimeout(() => {
-      // Redirect to dashboard
-      window.location.href = 'dashboard.html';
-    }, 1200);
+    // ✅ Let Laravel handle the submit — no preventDefault here
   });
 
-  // Toggle password visibility
   const togglePass = $('#toggle-pass');
   const passInput = $('#login-pass');
   if (togglePass && passInput) {
@@ -135,43 +124,34 @@ function initLogin() {
   }
 }
 
-// ── Register Page ────────────────────────────
 function initRegister() {
   const form = $('#register-form');
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
     const name = $('#reg-name').value.trim();
     const email = $('#reg-email').value.trim();
     const pass = $('#reg-pass').value;
     const confirm = $('#reg-confirm').value;
-    const btn = form.querySelector('[type="submit"]');
 
     if (!name || !email || !pass || !confirm) {
+      e.preventDefault();
       showAlert(form, 'Please fill in all fields.');
       return;
     }
-
     if (pass.length < 8) {
+      e.preventDefault();
       showAlert(form, 'Password must be at least 8 characters.');
       return;
     }
-
     if (pass !== confirm) {
+      e.preventDefault();
       showAlert(form, 'Passwords do not match.');
       return;
     }
-
-    btn.textContent = 'creating account...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      window.location.href = 'dashboard.html';
-    }, 1400);
+    // ✅ Let Laravel handle the submit
   });
 
-  // Live password strength
   const passInput = $('#reg-pass');
   const strengthBar = $('#pass-strength');
   if (passInput && strengthBar) {
@@ -241,16 +221,16 @@ function initEditProfile() {
   const socialList = $('#social-list');
   if (addSocial && socialList) {
     addSocial.addEventListener('click', () => {
-      const row = document.createElement('div');
-      row.className = 'flex gap-1 mb-1';
-      row.innerHTML = `
-        <input class="form-input" placeholder="Platform (e.g. GitHub)" style="max-width:140px">
-        <input class="form-input" placeholder="URL" style="flex:1">
-        <button type="button" class="btn btn--ghost btn--sm remove-social" title="Remove">✕</button>
-      `;
-      row.querySelector('.remove-social').addEventListener('click', () => row.remove());
-      socialList.appendChild(row);
-    });
+    const count = socialList.querySelectorAll('.flex').length; // 👈 missing line
+    const row = document.createElement('div');
+    row.innerHTML = `
+        <input class="form-input" name="social_links[${count}][platform]" placeholder="Platform" style="max-width:140px">
+        <input class="form-input" name="social_links[${count}][url]" placeholder="URL" style="flex:1">
+        <button type="button" class="btn btn--ghost btn--sm remove-social">✕</button>
+    `;
+    row.querySelector('.remove-social').addEventListener('click', () => row.remove());
+    socialList.appendChild(row);
+});
   }
 
   // Attach existing remove buttons
@@ -259,17 +239,7 @@ function initEditProfile() {
   });
 
   // Save
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('[type="submit"]');
-    btn.textContent = 'saving...';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'save changes';
-      btn.disabled = false;
-      showAlert(form, 'Profile saved successfully.', 'success');
-    }, 1000);
-  });
+  
 }
 
 // ── Projects ─────────────────────────────────
