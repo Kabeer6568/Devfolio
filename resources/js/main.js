@@ -13,6 +13,7 @@ const page = document.body.dataset.page;
 // ── Init on DOM Ready ─────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
+  initSidebar();
   if (page === 'home')          initHome();
   if (page === 'login')         initLogin();
   if (page === 'register')      initRegister();
@@ -382,4 +383,31 @@ function initPortfolio() {
       }
     });
   });
+}
+
+
+
+
+
+
+
+
+
+
+function initSidebar() {
+    const currentPath = window.location.pathname;
+    
+    $$('.sidebar__link').forEach(link => {
+        // Remove active from all
+        link.classList.remove('active');
+        try {
+            // Convert full URL to just pathname for comparison
+            const linkPath = new URL(link.getAttribute('href')).pathname;
+            if (linkPath === currentPath) {
+                link.classList.add('active');
+            }
+        } catch {
+            // For non-URL hrefs like '#' or 'login.html' — skip
+        }
+    });
 }

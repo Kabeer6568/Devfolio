@@ -7,6 +7,12 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('layouts.index');
 })->name('main.index');
+Route::get('/skills', function () {
+    return view('layouts.admin.skills');
+})->name('user.skills');
+Route::get('/projects', function () {
+    return view('layouts.admin.projects');
+})->name('user.project');
 
 //Edit Profile
 
