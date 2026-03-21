@@ -106,6 +106,8 @@
 
   @elseif(auth()->check() && $page === 'user.project' )
 
+  <body data-page="projects">
+
   <nav class="navbar">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
@@ -142,7 +144,7 @@
 
 <!-- Sidebar -->
 
-@if(auth()->check() && $page === 'user.dashboard' || "user.edit" || "user.skills")
+@if(auth()->check() && ($page === 'user.dashboard' || "user.edit" || "user.skills"))
 
 
   <div class="dashboard">

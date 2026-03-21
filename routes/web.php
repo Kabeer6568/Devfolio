@@ -9,10 +9,10 @@ Route::get('/', function () {
 })->name('main.index');
 Route::get('/skills', function () {
     return view('layouts.admin.skills');
-})->name('user.skills');
+})->middleware('auth')->name('user.skills');
 Route::get('/projects', function () {
     return view('layouts.admin.projects');
-})->name('user.project');
+})->middleware('auth')->name('user.project');
 
 //Edit Profile
 
