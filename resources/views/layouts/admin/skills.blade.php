@@ -96,21 +96,30 @@
         <button class="btn btn--ghost btn--sm" data-close-modal="skill-modal">✕</button>
       </div>
 
-      <form id="skill-form">
+      <form id="skill-form" action="{{ route('user.skillsAdded') }}" method="POST">
+        @csrf
         <div class="form-group">
-          <label class="form-label" for="skill-name">Skill name *</label>
-          <input class="form-input" type="text" id="skill-name" placeholder="e.g. React, Python, Docker" />
+          <label class="form-label" for="skill-name" >Skill name *</label>
+          <input class="form-input" type="text" name="name" id="skill-name" placeholder="e.g. React, Python, Docker" />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="skill-category">Category</label>
-          <select class="form-select" id="skill-category">
+          <!-- <select class="form-select" id="skill-category">
             <option value="Frontend">Frontend</option>
             <option value="Backend">Backend</option>
             <option value="DevOps">DevOps</option>
             <option value="Design">Design</option>
             <option value="Other">Other</option>
-          </select>
+          </select> -->
+          <input class="form-select" name="category" id="skill-category" list="category-options" placeholder="e.g. Frontend" />
+            <datalist id="category-options">
+                <option value="Frontend">
+                <option value="Backend">
+                <option value="DevOps">
+                <option value="Design">
+                <option value="Database">
+            </datalist>
         </div>
 
         <div class="form-group">
@@ -121,7 +130,7 @@
           <input
             type="range"
             id="skill-level"
-            min="10" max="100" value="50" step="5"
+            min="10" max="100" value="50" name="level" step="5"
             style="width:100%; accent-color:var(--text); cursor:pointer;"
           />
           <div style="display:flex; justify-content:space-between; margin-top:0.25rem;">

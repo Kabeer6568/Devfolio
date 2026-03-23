@@ -314,19 +314,19 @@ function initSkills() {
     });
   }
 
-  if (skillForm) {
-    skillForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = $('#skill-name').value.trim();
-      const level = rangeInput ? rangeInput.value : 50;
-      const category = $('#skill-category').value;
-      if (!name) { showAlert(skillForm, 'Skill name required.'); return; }
-      addSkillRow({ name, level, category });
-      closeModal('skill-modal');
-      skillForm.reset();
-      if (rangeLabel) rangeLabel.textContent = '50%';
-    });
-  }
+  // if (skillForm) {
+  //   skillForm.addEventListener('submit', (e) => {
+  //     e.preventDefault();
+  //     const name = $('#skill-name').value.trim();
+  //     const level = rangeInput ? rangeInput.value : 50;
+  //     const category = $('#skill-category').value;
+  //     if (!name) { showAlert(skillForm, 'Skill name required.'); return; }
+  //     addSkillRow({ name, level, category });
+  //     closeModal('skill-modal');
+  //     skillForm.reset();
+  //     if (rangeLabel) rangeLabel.textContent = '50%';
+  //   });
+  // }
 
   // Animate existing skill bars
   setTimeout(() => {

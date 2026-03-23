@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SkillController;
 
 
 Route::get('/', function () {
@@ -13,6 +14,9 @@ Route::get('/skills', function () {
 Route::get('/projects', function () {
     return view('layouts.admin.projects');
 })->middleware('auth')->name('user.project');
+
+
+Route::post('/skills', [SkillController::class , 'CreateSkill'])->middleware('auth')->name('user.skillsAdded');
 
 //Edit Profile
 
