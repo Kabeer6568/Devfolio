@@ -22,7 +22,7 @@
           <div class="stat-card__label">Projects</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card__num" data-count="8">0</div>
+          <div class="stat-card__num" data-count="{{ $user->skills()->count() }}">0</div>
           <div class="stat-card__label">Skills</div>
         </div>
         <div class="stat-card">
@@ -30,7 +30,7 @@
           <div class="stat-card__label">Profile views</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card__num" data-count="4">0</div>
+          <div class="stat-card__num" data-count="{{ $user->yoe }}">0</div>
           <div class="stat-card__label">Yrs experience</div>
         </div>
       </div>

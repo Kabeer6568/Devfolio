@@ -17,6 +17,7 @@ Route::get('/projects', function () {
 
 
 Route::get('/skills', [SkillController::class, 'showSkills'])->middleware('auth')->name('user.skills');
+Route::delete('/skills/{id}', [SkillController::class, 'deleteSkill'])->middleware('auth')->name('user.delSkills');
 
 Route::post('/skills', [SkillController::class , 'CreateSkill'])->middleware('auth')->name('user.skillsAdded');
 

@@ -45,4 +45,19 @@ class SkillController extends Controller
     return view('layouts.admin.skills', compact('skills'));
 
     }
+
+    public function deleteSkill($id){
+
+       $skill = Skill::findOrFail($id);
+
+       if ($skill->user_id !== auth()->id()) {
+        abort(403);
+       }
+
+       $skill->delete();
+        
+        return redirect()->route('user.skills')->with('success', 'Skill Deleted');
+
+    }
+
 }

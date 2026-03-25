@@ -32,7 +32,11 @@
             <div class="skill-item__bar"><div class="skill-item__fill" data-width="90%" style="width:0%"></div></div>
             <span class="skill-item__pct">{{ $skill->level }}</span>
             <span class="tag">{{ $skill->category }}</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
+            <form method="POST" action="{{ route('user.delSkills' , $skill->id) }}">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn--ghost btn--sm skdelete-ill" title="Remove">✕</button>
+            </form>
           </div>
           @endforeach
           
