@@ -8,13 +8,15 @@ use App\Http\Controllers\SkillController;
 Route::get('/', function () {
     return view('layouts.index');
 })->name('main.index');
-Route::get('/skills', function () {
-    return view('layouts.admin.skills');
-})->middleware('auth')->name('user.skills');
+// Route::get('/skills', function () {
+//     return view('layouts.admin.skills');
+// })->middleware('auth')->name('user.skills');
 Route::get('/projects', function () {
     return view('layouts.admin.projects');
 })->middleware('auth')->name('user.project');
 
+
+Route::get('/skills', [SkillController::class, 'showSkills'])->middleware('auth')->name('user.skills');
 
 Route::post('/skills', [SkillController::class , 'CreateSkill'])->middleware('auth')->name('user.skillsAdded');
 

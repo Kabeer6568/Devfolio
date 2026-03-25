@@ -56,4 +56,9 @@ class User extends Authenticatable
             'social_links' => 'array',
         ];
     }
+
+    public function skills()
+    {
+        return $this->hasMany(Skill::class);
+    }
 }

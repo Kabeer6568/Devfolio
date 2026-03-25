@@ -18,69 +18,24 @@
           <h3 style="font-size:0.9375rem;">All Skills</h3>
           <div style="display:flex; gap:0.5rem;">
             <button class="btn btn--ghost btn--sm" onclick="filterSkills('all')" id="filter-all" style="color:var(--text);">All</button>
-            <button class="btn btn--ghost btn--sm" onclick="filterSkills('Frontend')">Frontend</button>
-            <button class="btn btn--ghost btn--sm" onclick="filterSkills('Backend')">Backend</button>
-            <button class="btn btn--ghost btn--sm" onclick="filterSkills('DevOps')">DevOps</button>
+            @foreach($skills->unique('category') as $skill)
+            <button class="btn btn--ghost btn--sm" onclick="filterSkills('{{ $skill->category }}')">{{ $skill->category }}</button>
+            @endforeach
+            
           </div>
         </div>
 
         <div id="skills-list">
-          <div class="skill-item" data-category="Frontend">
-            <span class="skill-item__name">React</span>
+          @foreach($skills as $skill)
+          <div class="skill-item" data-category="{{ $skill->category }}">
+            <span class="skill-item__name">{{ $skill->name }}</span>
             <div class="skill-item__bar"><div class="skill-item__fill" data-width="90%" style="width:0%"></div></div>
-            <span class="skill-item__pct">90%</span>
-            <span class="tag">Frontend</span>
+            <span class="skill-item__pct">{{ $skill->level }}</span>
+            <span class="tag">{{ $skill->category }}</span>
             <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
           </div>
-          <div class="skill-item" data-category="Frontend">
-            <span class="skill-item__name">TypeScript</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85%" style="width:0%"></div></div>
-            <span class="skill-item__pct">85%</span>
-            <span class="tag">Frontend</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="Frontend">
-            <span class="skill-item__name">CSS / Tailwind</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80%" style="width:0%"></div></div>
-            <span class="skill-item__pct">80%</span>
-            <span class="tag">Frontend</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="Backend">
-            <span class="skill-item__name">Node.js</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="88%" style="width:0%"></div></div>
-            <span class="skill-item__pct">88%</span>
-            <span class="tag">Backend</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="Backend">
-            <span class="skill-item__name">PostgreSQL</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70%" style="width:0%"></div></div>
-            <span class="skill-item__pct">70%</span>
-            <span class="tag">Backend</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="Backend">
-            <span class="skill-item__name">Python</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="60%" style="width:0%"></div></div>
-            <span class="skill-item__pct">60%</span>
-            <span class="tag">Backend</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="DevOps">
-            <span class="skill-item__name">Docker</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="65%" style="width:0%"></div></div>
-            <span class="skill-item__pct">65%</span>
-            <span class="tag">DevOps</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
-          <div class="skill-item" data-category="DevOps">
-            <span class="skill-item__name">GitHub Actions</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="72%" style="width:0%"></div></div>
-            <span class="skill-item__pct">72%</span>
-            <span class="tag">DevOps</span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
-          </div>
+          @endforeach
+          
         </div>
 
       </div>
@@ -146,6 +101,11 @@
       </form>
     </div>
   </div>
+
+  <!-- Add this inside the modal form after the skill name input -->
+@error('name')
+    <p style="color:red; font-size:0.8rem; margin-top:0.25rem;">{{ $message }}</p>
+@enderror
 
   
   <script>
