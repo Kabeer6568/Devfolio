@@ -255,7 +255,7 @@ function initProjects() {
   });
 
   // Project form submit
-  const projForm = $('#project-form');
+  // const projForm = $('#project-form');
   if (projForm) {
     projForm.addEventListener('submit', (e) => {
       e.preventDefault();

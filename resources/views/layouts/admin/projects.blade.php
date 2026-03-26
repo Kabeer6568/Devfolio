@@ -86,37 +86,38 @@
         <button class="btn btn--ghost btn--sm" data-close-modal="project-modal">✕</button>
       </div>
 
-      <form id="project-form">
+      <form id="project-form" action="{{ route('user.project') }}" method="POST">
+        @csrf
         <div class="form-group">
           <label class="form-label" for="proj-title">Project name *</label>
-          <input class="form-input" type="text" id="proj-title" placeholder="My awesome project" />
+          <input class="form-input" name="title" type="text" id="proj-title" placeholder="My awesome project" />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="proj-desc">Description</label>
-          <textarea class="form-textarea" id="proj-desc" rows="3" placeholder="What does this project do?"></textarea>
+          <textarea class="form-textarea" name="description" id="proj-desc" rows="3" placeholder="What does this project do?"></textarea>
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
           <div class="form-group">
             <label class="form-label" for="proj-live">Live URL</label>
-            <input class="form-input" type="url" id="proj-live" placeholder="https://..." />
+            <input class="form-input" name="live_link" type="url" id="proj-live" placeholder="https://..." />
           </div>
           <div class="form-group">
             <label class="form-label" for="proj-github">GitHub URL</label>
-            <input class="form-input" type="url" id="proj-github" placeholder="https://github.com/..." />
+            <input class="form-input" name="github_link" type="url" id="proj-github" placeholder="https://github.com/..." />
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="proj-tags">Tags</label>
-          <input class="form-input" type="text" id="proj-tags" placeholder="React, TypeScript, Node.js" />
+          <input class="form-input" type="text"  name="tags" id="proj-tags" placeholder="React, TypeScript, Node.js" />
           <p class="form-hint">Comma-separated list of technologies used.</p>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="proj-status">Status</label>
-          <select class="form-select" id="proj-status">
+          <select class="form-select" name="status" id="proj-status">
             <option value="published">Published</option>
             <option value="draft">Draft</option>
           </select>

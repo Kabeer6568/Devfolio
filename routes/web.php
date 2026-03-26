@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ProjectController;
 
 
 Route::get('/', function () {
@@ -11,9 +12,13 @@ Route::get('/', function () {
 // Route::get('/skills', function () {
 //     return view('layouts.admin.skills');
 // })->middleware('auth')->name('user.skills');
-Route::get('/projects', function () {
-    return view('layouts.admin.projects');
-})->middleware('auth')->name('user.project');
+// Route::get('/projects', function () {
+//     return view('layouts.admin.projects');
+// })->middleware('auth')->name('user.project');
+
+
+Route::get('/projects' , [ProjectController::class , 'showProject'])->middleware('auth')->name('user.project');
+Route::post('/projects' , [ProjectController::class , 'createProject'])->middleware('auth')->name('user.createProject');
 
 
 Route::get('/skills', [SkillController::class, 'showSkills'])->middleware('auth')->name('user.skills');
