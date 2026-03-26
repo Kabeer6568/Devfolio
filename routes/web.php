@@ -4,17 +4,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PortfolioController;
 
 
 Route::get('/', function () {
     return view('layouts.index');
 })->name('main.index');
-// Route::get('/skills', function () {
-//     return view('layouts.admin.skills');
-// })->middleware('auth')->name('user.skills');
+// Route::get('/portfolio', function () {
+//     return view('layouts.admin.portfolio');
+// })->middleware('auth')->name('user.protfolio');
+
 // Route::get('/projects', function () {
 //     return view('layouts.admin.projects');
 // })->middleware('auth')->name('user.project');
+
+Route::get('/portfolio' , [PortfolioController::class , 'userPortfolio'])->middleware('auth')->name('user.protfolio');
 
 
 Route::get('/projects' , [ProjectController::class , 'showProject'])->middleware('auth')->name('user.project');

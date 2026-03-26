@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jane Smith — Developer Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="portfolio">
 
-  <!-- Minimal portfolio navbar -->
-  <nav class="navbar">
-    <div class="navbar__inner">
-      <span class="navbar__logo">dev<span>folio</span></span>
-      <ul class="navbar__links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="register.html" class="btn btn--outline btn--sm">Build yours</a></li>
-      </ul>
-    </div>
-  </nav>
+@extends('layouts.app')
+
+@section('content')
 
   <!-- Hero -->
   <section class="portfolio-hero" id="about">
@@ -30,17 +12,16 @@
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #D4CFC7, #A8A49C); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:1.5rem; color:#fff;">J</div>
         </div>
         <div style="flex:1;">
-          <p class="section-label" style="margin-bottom:0.5rem;">// full-stack developer</p>
-          <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom:1rem; font-weight:400;">Jane Smith</h1>
+          <p class="section-label" style="margin-bottom:0.5rem;">// {{ $user->title }}</p>
+          <h1 style="font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom:1rem; font-weight:400;">{{ $user->name }}</h1>
           <p style="font-size:1rem; color:var(--text-2); line-height:1.75; max-width:520px; margin-bottom:1.5rem;">
-            I build fast, thoughtful web applications. Currently focused on React, Node.js, and distributed systems.
-            Open to remote opportunities.
+            {{ $user->bio }}
           </p>
           <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
-            <a href="mailto:jane@example.com" class="btn btn--primary">Get in touch</a>
+            <a href="mailto:{{ $user->email }}" class="btn btn--primary">Get in touch</a>
             <a href="https://github.com" target="_blank" class="btn btn--outline">GitHub ↗</a>
             <a href="https://linkedin.com" target="_blank" class="btn btn--outline">LinkedIn ↗</a>
-            <a href="#" class="btn btn--ghost" style="font-family:var(--font-mono); font-size:0.75rem;">Resume ↓</a>
+            <a href="{{ $user->upload_cv }}" class="btn btn--ghost" style="font-family:var(--font-mono); font-size:0.75rem;">Resume ↓</a>
           </div>
         </div>
       </div>
@@ -48,19 +29,19 @@
       <!-- Quick stats -->
       <div style="display:flex; gap:2rem; margin-top:3rem; flex-wrap:wrap; padding-top:2rem; border-top:1px solid var(--border);">
         <div>
-          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">4+</div>
+          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">{{ $user->yoe }}+</div>
           <div class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem;">Years exp.</div>
         </div>
         <div>
-          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">12</div>
+          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">{{ $user->projects()->count() }}</div>
           <div class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem;">Projects</div>
         </div>
         <div>
-          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">8</div>
+          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">{{ $user->skills()->count() }}</div>
           <div class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem;">Skills</div>
         </div>
         <div>
-          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">San Francisco, CA</div>
+          <div style="font-family:var(--font-mono); font-size:1.5rem; font-weight:300;">{{ $user->location }}</div>
           <div class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem;">Location</div>
         </div>
       </div>
@@ -197,10 +178,10 @@
       <div style="max-width:440px;">
         <h2 style="font-size:1.5rem; font-weight:400; margin-bottom:0.75rem;">Open to opportunities</h2>
         <p class="text-muted" style="margin-bottom:1.5rem; line-height:1.7;">
-          I'm currently looking for full-time remote roles. If you have an opportunity that fits, I'd love to hear from you.
+          {{ $user->bio }}
         </p>
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <a href="mailto:jane@example.com" class="btn btn--primary">Send an email</a>
+          <a href="mailto:{{ $user->email }}" class="btn btn--primary">Send an email</a>
           <a href="https://linkedin.com" target="_blank" class="btn btn--outline">Connect on LinkedIn</a>
         </div>
       </div>
@@ -210,7 +191,7 @@
   <!-- Footer -->
   <footer style="border-top: 1px solid var(--border); padding: 1.5rem 0;">
     <div class="container--narrow" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-      <span class="text-mono text-faint" style="font-size:0.75rem;">jane.smith — made with <a href="index.html" style="color:var(--text-3); text-decoration:underline;">devfolio</a></span>
+      <span class="text-mono text-faint" style="font-size:0.75rem;">{{ $user->name }} — made with <a href="index.html" style="color:var(--text-3); text-decoration:underline;">devfolio</a></span>
       <a href="register.html" class="btn btn--outline btn--sm">Build your portfolio →</a>
     </div>
   </footer>
@@ -218,3 +199,4 @@
   <script src="main.js"></script>
 </body>
 </html>
+@endsection

@@ -121,6 +121,27 @@
   </nav>
 
 
+  <!-- Portfolio page  -->
+
+@elseif($page === 'user.protfolio' )
+
+
+
+  <body data-page="portfolio">
+
+  <!-- Minimal portfolio navbar -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <span class="navbar__logo">dev<span>folio</span></span>
+      <ul class="navbar__links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="register.html" class="btn btn--outline btn--sm">Build yours</a></li>
+      </ul>
+    </div>
+  </nav>
+
 
 
 @else($page === 'main.index' )
@@ -144,8 +165,7 @@
 
 <!-- Sidebar -->
 
-@if(auth()->check() && ($page === 'user.dashboard' || "user.edit" || "user.skills"))
-
+@if(auth()->check() && in_array($page, ['user.dashboard', 'user.edit', 'user.skills', 'user.project']))
 
   <div class="dashboard">
 
