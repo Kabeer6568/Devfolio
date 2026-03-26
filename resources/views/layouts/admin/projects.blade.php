@@ -26,10 +26,20 @@
               </tr>
             </thead>
             <tbody id="projects-tbody">
+              @foreach($userProjects as $userProject)
               <tr>
-                <td class="text-mono">TaskFlow</td>
-                <td class="text-muted text-sm">Real-time collaborative task manager</td>
-                <td><span class="tag">React</span> <span class="tag">Node.js</span> <span class="tag">Socket.io</span></td>
+                <td class="text-mono">{{ $userProject->title }}</td>
+                <td class="text-muted text-sm">{{ $userProject->description }}</td>
+
+                
+                <td>
+                  @if($userProject->tags)
+                @foreach(explode(',' , $userProject->tags) as $tag)
+                <span class="tag">{{ $tag }}</span> 
+              @endforeach
+                @endif
+              </td>
+                
                 <td>
                   <div class="flex gap-1">
                     <button class="btn btn--outline btn--sm">edit</button>
@@ -37,6 +47,7 @@
                   </div>
                 </td>
               </tr>
+              @endforeach
               <tr>
                 <td class="text-mono">Pricewatch</td>
                 <td class="text-muted text-sm">E-commerce price tracker</td>

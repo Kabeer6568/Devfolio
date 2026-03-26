@@ -81,8 +81,9 @@ class AuthController extends Controller
     public function dash(){
 
         $user = auth()->user();
+        $projects = $user->projects()->get();
         
-        return view('layouts.admin.dashboard' , compact('user'));
+        return view('layouts.admin.dashboard' , compact('user' , 'projects'));
         
     }
 
