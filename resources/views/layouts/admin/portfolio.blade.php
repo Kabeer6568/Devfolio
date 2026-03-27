@@ -9,7 +9,7 @@
       <div style="display:flex; align-items:flex-start; gap:2rem; flex-wrap:wrap;">
         <!-- Avatar -->
         <div style="width:72px; height:72px; border-radius:50%; background:var(--border); overflow:hidden; flex-shrink:0; border:1px solid var(--border);">
-          <div style="width:100%; height:100%; background: linear-gradient(135deg, #D4CFC7, #A8A49C); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:1.5rem; color:#fff;">J</div>
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #D4CFC7, #A8A49C); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:1.5rem; color:#fff;">{{ ucFirst(substr($user->name, 0 ,1)) }}</div>
         </div>
         <div style="flex:1;">
           <p class="section-label" style="margin-bottom:0.5rem;">// {{ $user->title }}</p>
@@ -19,9 +19,13 @@
           </p>
           <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
             <a href="mailto:{{ $user->email }}" class="btn btn--primary">Get in touch</a>
-            <a href="https://github.com" target="_blank" class="btn btn--outline">GitHub ↗</a>
-            <a href="https://linkedin.com" target="_blank" class="btn btn--outline">LinkedIn ↗</a>
-            <a href="{{ $user->upload_cv }}" class="btn btn--ghost" style="font-family:var(--font-mono); font-size:0.75rem;">Resume ↓</a>
+            @if($user->social_links)
+            @foreach($user->social_links as $link => $value)
+            <a href="{{ $value['url'] }}" target="_blank" class="btn btn--outline">{{ $value['platform'] }} ↗</a>
+            @endforeach
+            @endif
+            
+            <a href="{{ $user->upload_cv }}" download class="btn btn--ghost" style="font-family:var(--font-mono); font-size:0.75rem;">Resume ↓</a>
           </div>
         </div>
       </div>
@@ -53,60 +57,25 @@
     <div class="container--narrow">
       <p class="section-label">// featured projects</p>
       <div class="project-grid">
+        @foreach($projects as $project)
         <div class="project-card">
-          <h3 class="project-card__title">TaskFlow</h3>
-          <p class="project-card__desc">A real-time collaborative task manager built with React, Socket.io, and PostgreSQL. Supports workspaces, comments, and drag-and-drop.</p>
+          <h3 class="project-card__title">{{ $project->title }}</h3>
+          <p class="project-card__desc">{{ $project->description }}</p>
           <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">Socket.io</span>
-            <span class="tag">PostgreSQL</span>
+            @if($project->tags)
+            @foreach(explode(',' , $project->tags) as $tag)
+            <span class="tag">{{ $tag }}</span>
+            @endforeach
+            @endif
           </div>
           <div class="project-card__links">
-            <a href="#" class="project-card__link">Live demo ↗</a>
-            <a href="#" class="project-card__link">GitHub ↗</a>
+            <a href="{{ $project->live_link }}" class="project-card__link">Live demo ↗</a>
+            <a href="{{ $project->github_link }}" class="project-card__link">GitHub ↗</a>
           </div>
         </div>
+        @endforeach
 
-        <div class="project-card">
-          <h3 class="project-card__title">Pricewatch</h3>
-          <p class="project-card__desc">An e-commerce price tracker that monitors hundreds of products and sends alerts when prices drop. Built with Python and Playwright.</p>
-          <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <span class="tag">Python</span>
-            <span class="tag">Playwright</span>
-            <span class="tag">Redis</span>
-          </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">GitHub ↗</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3 class="project-card__title">Logcraft</h3>
-          <p class="project-card__desc">A lightweight developer logging library for Node.js with structured JSON output, log levels, and Datadog/CloudWatch integrations.</p>
-          <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <span class="tag">TypeScript</span>
-            <span class="tag">npm</span>
-            <span class="tag">CI/CD</span>
-          </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">npm ↗</a>
-            <a href="#" class="project-card__link">GitHub ↗</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3 class="project-card__title">DevDash</h3>
-          <p class="project-card__desc">A personal developer dashboard that aggregates GitHub activity, Jira tickets, and Slack messages in one place.</p>
-          <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <span class="tag">Next.js</span>
-            <span class="tag">OAuth</span>
-            <span class="tag">REST APIs</span>
-          </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">Live demo ↗</a>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>
@@ -118,55 +87,34 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; flex-wrap:wrap;">
 
         <!-- Frontend -->
+        
+        
         <div>
           <h4 style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); font-family:var(--font-mono); margin-bottom:1rem;">Frontend</h4>
+          @foreach($skills->where('category' , 'Frontend') as $skill)
           <div class="skill-item">
-            <span class="skill-item__name">React</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="90%" style="width:0%"></div></div>
-            <span class="skill-item__pct">90%</span>
+            <span class="skill-item__name">{{ $skill->name }}</span>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="{{ $skill->level }}%" style="width:0%"></div></div>
+            <span class="skill-item__pct">{{ $skill->level }}%</span>
           </div>
-          <div class="skill-item">
-            <span class="skill-item__name">TypeScript</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85%" style="width:0%"></div></div>
-            <span class="skill-item__pct">85%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-item__name">CSS / Tailwind</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80%" style="width:0%"></div></div>
-            <span class="skill-item__pct">80%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-item__name">Next.js</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="75%" style="width:0%"></div></div>
-            <span class="skill-item__pct">75%</span>
-          </div>
+          @endforeach
+          
         </div>
 
         <!-- Backend -->
+        
         <div>
           <h4 style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); font-family:var(--font-mono); margin-bottom:1rem;">Backend & Tools</h4>
+          @foreach($skills->where('category' , '!=' , 'Frontend') as $skill)
           <div class="skill-item">
-            <span class="skill-item__name">Node.js</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="88%" style="width:0%"></div></div>
-            <span class="skill-item__pct">88%</span>
+            <span class="skill-item__name">{{ $skill->name }}</span>
+            <div class="skill-item__bar"><div class="skill-item__fill" data-width="{{ $skill->level }}%" style="width:0%"></div></div>
+            <span class="skill-item__pct">{{ $skill->level }}%</span>
           </div>
-          <div class="skill-item">
-            <span class="skill-item__name">PostgreSQL</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70%" style="width:0%"></div></div>
-            <span class="skill-item__pct">70%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-item__name">Docker</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="65%" style="width:0%"></div></div>
-            <span class="skill-item__pct">65%</span>
-          </div>
-          <div class="skill-item">
-            <span class="skill-item__name">Python</span>
-            <div class="skill-item__bar"><div class="skill-item__fill" data-width="60%" style="width:0%"></div></div>
-            <span class="skill-item__pct">60%</span>
-          </div>
+          @endforeach
         </div>
-
+        
+        
       </div>
     </div>
   </section>
@@ -191,8 +139,8 @@
   <!-- Footer -->
   <footer style="border-top: 1px solid var(--border); padding: 1.5rem 0;">
     <div class="container--narrow" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-      <span class="text-mono text-faint" style="font-size:0.75rem;">{{ $user->name }} — made with <a href="index.html" style="color:var(--text-3); text-decoration:underline;">devfolio</a></span>
-      <a href="register.html" class="btn btn--outline btn--sm">Build your portfolio →</a>
+      <span class="text-mono text-faint" style="font-size:0.75rem;">{{ $user->name }} — made with <a href="{{ route('main.index') }}" style="color:var(--text-3); text-decoration:underline;">devfolio</a></span>
+      <a href="{{ route('main.index') }}" class="btn btn--outline btn--sm">Build your portfolio →</a>
     </div>
   </footer>
 

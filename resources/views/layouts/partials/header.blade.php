@@ -12,7 +12,7 @@
     <div class="navbar__inner">
       <a href="{{ route('main.index') }}" class="navbar__logo">dev<span>folio</span></a>
       <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
+        <li><a href="{{ route('user.protfolio') }}" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
         <li>
           <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">{{ ucfirst(substr($user->username , 0 ,1)) }}</div>
         </li>
@@ -37,9 +37,9 @@
 
   <nav class="navbar">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
+      <a href="{{ route('main.index') }}" class="navbar__logo">dev<span>folio</span></a>
       <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
+        <li><a href="{{ route('user.protfolio') }}" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
         <li>
           <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">{{ ucfirst(substr(auth()->user()->username, 0, 1)) }}</div>
         </li>
@@ -91,9 +91,9 @@
 
   <nav class="navbar">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
+      <a href="{{ route('main.index') }}" class="navbar__logo">dev<span>folio</span></a>
       <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
+        <li><a href="{{ route('user.protfolio') }}" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
         <li>
           <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">{{ ucfirst(substr(auth()->user()->username, 0, 1)) }}</div>
         </li>
@@ -110,9 +110,9 @@
 
   <nav class="navbar">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
+      <a href="{{ route('main.index') }}" class="navbar__logo">dev<span>folio</span></a>
       <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
+        <li><a href="{{ route('user.protfolio') }}" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
         <li>
           <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">{{ ucfirst(substr(auth()->user()->username, 0, 1)) }}</div>
         </li>
@@ -137,7 +137,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="register.html" class="btn btn--outline btn--sm">Build yours</a></li>
+        <li><a href="{{ route('user.create' , ['type' => 'register']) }}" class="btn btn--outline btn--sm">Build yours</a></li>
       </ul>
     </div>
   </nav>
